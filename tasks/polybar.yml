@@ -1,0 +1,52 @@
+---
+- name: POLYBAR | set polydir fact
+  set_fact:
+    polydir: "{{ homedir }}/polybar/polybar-{{ polybar_version }}"
+
+- name: POLYBAR | ensure Directory exists
+  file:
+    path: "{{ polydir }}"
+    state: directory
+    mode: '0755'
+
+- name: POLYBAR | Get tarball
+  get_url:
+    url: "https://github.com/polybar/polybar/releases/download/{{ polybar_version }}/polybar-{{ polybar_version }}.tar.gz"
+    dest: "{{ homedir }}/polybar/"
+  register: polybar_tarball
+
+- name: POLYBAR | Extract tarball
+  unarchive:
+    src: "{{ homedir }}//polybar/polybar-{{ polybar_version }}.tar.gz"
+    dest: "{{ homedir }}/polybar/"
+    copy: no
+  when: polybar_tarball.changed
+  register: polybar_extracted
+
+- name: POLYBAR | create build dir
+  file:
+    path: "{{ polydir }}/build"
+    state: directory
+    mode: '0755'
+  when: polybar_extracted.changed
+
+- name: POLYBAR | build
+  shell: "{{ poly_build_commands }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ polydir }}/build"
+  loop:
+    - cmake ..
+    - make -j"$(nproc)"
+  loop_control:
+    loop_var: poly_build_commands
+  register: poly_build
+  when: polybar_extracted.changed
+
+- name: POLYBAR | Install
+  shell: make install
+  args:
+    executable: /bin/bash
+    chdir: "{{ polydir }}/build"
+  become: true
+  when: polybar_extracted.changed
