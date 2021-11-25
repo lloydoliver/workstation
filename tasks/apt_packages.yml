@@ -1,11 +1,13 @@
 ---
 - name: Ensure system is up to date
+  become: yes
   apt:
     state: latest
     name: '*'
     update_cache: yes
 
 - name: Install base packages
+  become: yes
   apt:
     state: present
     name:
