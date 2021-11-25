@@ -3,3 +3,42 @@
   git:
     dest: "{{ homedir }}/.dotfiles"
     repo: "{{ dotfile_repo }}"
+    recursive: yes
+    accept_hostkey: yes
+
+- name: check bashrc
+  stat:
+    path: "{{ homedir }}/.bashrc"
+  register: bashrc
+
+- name: remove default bashrc
+  file:
+    state: absent
+    dest: "{{ homedir }}/.bashrc"
+  when: bashrc and bashrc.stat and not bashrc.stat.islnk
+
+- name: check zshrc
+  stat:
+    path: "{{ homedir }}/.zshrc"
+  register: zshrc
+
+- name: remove default zshrc
+  file:
+    state: absent
+    dest: "{{ homedir }}/.zshrc"
+  when: zshrc and zshrc.stat and not zshrc.stat.islnk
+
+- name: symlink dotfiles
+  file:
+    state: link
+    src: "{{ homedir }}/.dotfiles/{{ dotfile }}"
+    dest: "{{ homedir }}/{{ dotfile }}"
+  loop:
+    - .bashrc
+    - .zshrc
+    - .vimrc
+    - .gitconfig
+    - .gitignore
+  loop_control:
+    loop_var: dotfile
+
