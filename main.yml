@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Include APT sources tasks
+      include_tasks: "{{ playbook_dir }}/tasks/apt_sources.yml"
+    - name: Include APT package tasks
+      include_tasks: "{{ playbook_dir }}/tasks/apt_packages.yml"

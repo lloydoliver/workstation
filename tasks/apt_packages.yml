@@ -1,0 +1,74 @@
+---
+- name: Ensure system is up to date
+  apt:
+    state: latest
+    name: '*'
+    update_cache: yes
+
+- name: Install base packages
+  apt:
+    state: present
+    name:
+      -  build-essential
+      -  clang
+      -  cmake
+      -  cmake-data
+      -  compton
+      -  cryptsetup
+      -  curl
+      -  dconf-editor
+      -  dirmngr
+      -  feh
+      -  firefox
+      -  fonts-powerline
+      -  fzf
+      -  gcc
+      -  git
+      -  gnome-screensaver
+      -  gnome-terminal
+      -  gnupg-agent
+      -  gnupg2
+      -  google-cloud-sdk
+      -  hopenpgp-tools
+      -  htop
+      -  imagemagick
+      -  libcairo2-dev
+      -  libcurl4-openssl-dev
+      -  libjsoncpp-dev
+      -  libmpdclient-dev
+      -  libnl-genl-3-dev
+      -  libuv1-dev
+      -  libxcb-composite0-dev
+      -  libxcb-cursor-dev
+      -  libxcb-ewmh-dev
+      -  libxcb-icccm4-dev
+      -  libxcb-image0-dev
+      -  libxcb-randr0-dev
+      -  libxcb-util0-dev
+      -  libxcb-xkb-dev
+      -  libxcb-xrm-dev
+      -  libxcb1-dev
+      -  pcscd
+      -  pkg-config
+      -  python3-dev
+      -  python3-packaging
+      -  python3-pip
+      -  python3-setuptools
+      -  python3-sphinx
+      -  python3-xcbgen
+      -  regolith-desktop
+      -  scdaemon
+      -  secure-delete
+      -  shellcheck
+      -  thunar
+      -  unzip
+      -  vim
+      -  virtualbox
+      -  xautolock
+      -  xcb-proto
+      -  xclip
+      -  zsh
+    update_cache: yes
+  tags: [install]
+
+
