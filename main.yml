@@ -8,6 +8,7 @@
       loop:
         - "{{ playbook_dir }}/tasks/apt_sources.yml"
         - "{{ playbook_dir }}/tasks/apt_packages.yml"
+        - "{{ playbook_dir }}/tasks/vim.yml"
         - "{{ playbook_dir }}/tasks/dotfiles.yml"
       loop_control:
         loop_var: task

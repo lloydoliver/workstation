@@ -1,0 +1,60 @@
+---
+- name: VIM | Create directories
+  file:
+    state: directory
+    path: "{{ homedir }}/.vim/{{ vim_dir }}"
+    mode: '0755'
+  loop:
+    - autoload
+    - bundle
+    - .swap
+    - .tmp
+    - .undo
+  loop_control:
+    loop_var: vim_dir
+
+- name: VIM | Install pathogen
+  get_url:
+    url: https://tpo.pe/pathogen.vim
+    dest: "{{ homedir }}/.vim/autoload/pathogen.vim"
+
+- name: VIM | Install {{ plugin }}
+  git:
+    dest: "{{ homedir }}/.vim/bundle/{{ vim_plugin.name }}"
+    repo: "https://github.com/{{ vim_plugin.repo }}"
+    recursive: yes
+    accept_hostkey: yes
+  loop:
+    - name: vim-airline
+      repo: bling/vim-airline.git
+    - name: Dockerfile
+      repo: ekalinin/Dockerfile.vim.git
+    - name: Vim-Jinja2-Syntax
+      repo: Glench/Vim-Jinja2-Syntax.git
+    - name: tabular
+      repo: godlygeek/tabular.git
+    - name: rainbow_parentheses
+      repo: kien/rainbow_parentheses.vim.git
+    - name: vim-terraform
+      repo: markcornick/vim-terraform.git
+    - name: Jenkinsfile-vim-syntax
+      repo: martinda/Jenkinsfile-vim-syntax
+    - name: vim-better-whitespace
+      repo: ntpeters/vim-better-whitespace.git
+    - name: neomake
+      repo: neomake/neomake.git
+    - name: ansible-vim
+      repo: pearofducks/ansible-vim
+    - name: vim-markdown
+      repo: plasticboy/vim-markdown.git
+    - name: vim-puppet
+      repo: rodjek/vim-puppet.git
+    - name: salt-vim
+      repo: saltstack/salt-vim.git
+    - name: vim-fugitive
+      repo: tpope/vim-fugitive.git
+    - name: vim-speeddating
+      repo: tpope/vim-speeddating.git
+  loop_control:
+    loop_var: vim_plugin
+
