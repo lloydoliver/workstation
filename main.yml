@@ -1,9 +1,11 @@
 ---
 - hosts: all
-  become: true
-
   tasks:
-    - name: Include APT sources tasks
-      include_tasks: "{{ playbook_dir }}/tasks/apt_sources.yml"
-    - name: Include APT package tasks
-      include_tasks: "{{ playbook_dir }}/tasks/apt_packages.yml"
+    - name: Load encrypted vars file
+      community.sops.load_vars:
+        file: group_vars/all.sops.yml
+    - include_tasks: "{{ item }}"
+      loop:
+        - "{{ playbook_dir }}/tasks/apt_sources.yml"
+        - "{{ playbook_dir }}/tasks/apt_packages.yml"
+        - "{{ playbook_dir }}/tasks/dotfiles.yml"
