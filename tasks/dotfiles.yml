@@ -1,0 +1,5 @@
+---
+- name: Clone dotfiles repo
+  git:
+    dest: "{{ homedir }}/.dotfiles"
+    repo: "{{ dotfile_repo }}"
