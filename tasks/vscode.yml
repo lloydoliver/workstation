@@ -10,6 +10,7 @@
     path: "{{ homedir }}/Menlo-for-Powerline/"
     recurse: false
     pattern: "Menlo*.ttf"
+  when: menlo_repo.changed
   register: menlo_fonts
 
 - name: VSCode | Copy fonts
