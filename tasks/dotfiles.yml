@@ -1,34 +1,34 @@
 ---
-- name: Clone dotfiles repo
+- name: DOTFILES | Clone dotfiles repo
   git:
     dest: "{{ homedir }}/.dotfiles"
     repo: "{{ dotfile_repo }}"
     recursive: yes
     accept_hostkey: yes
 
-- name: check bashrc
+- name: DOTFILES | check bashrc
   stat:
     path: "{{ homedir }}/.bashrc"
   register: bashrc
 
-- name: remove default bashrc
+- name: DOTFILES | remove default bashrc
   file:
     state: absent
     dest: "{{ homedir }}/.bashrc"
   when: bashrc and bashrc.stat and not bashrc.stat.islnk
 
-- name: check zshrc
+- name: DOTFILES | check zshrc
   stat:
     path: "{{ homedir }}/.zshrc"
   register: zshrc
 
-- name: remove default zshrc
+- name: DOTFILES | remove default zshrc
   file:
     state: absent
     dest: "{{ homedir }}/.zshrc"
   when: zshrc and zshrc.stat and not zshrc.stat.islnk
 
-- name: symlink dotfiles
+- name: DOTFILES | symlink dotfiles
   file:
     state: link
     src: "{{ homedir }}/.dotfiles/{{ dotfile }}"
@@ -39,7 +39,14 @@
     - .vimrc
     - .gitconfig
     - .gitignore
-    - .Xresources
   loop_control:
     loop_var: dotfile
+
+- name: DOTFILES | symlink i3
+  become: true
+  file:
+    state: link
+    src: "{{ homedir}}/.dotfiles/config/i3/config"
+    dest: "/etc/regolith/i3/config"
+    force: true
 
