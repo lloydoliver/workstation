@@ -31,15 +31,3 @@
     repo: 'ppa:yubico/stable'
     state: present
 
-- name: APT | add Mopidy signing key
-  become: yes
-  apt_key:
-    url: https://apt.mopidy.com/mopidy.gpg
-    state: present
-
-- name: APT | add Mopidy source
-  become: yes
-  apt_repository:
-    repo: deb https://apt.mopidy.com/ buster main contrib non-free
-    filename: mopidy
-    state: present

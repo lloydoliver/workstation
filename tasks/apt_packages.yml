@@ -51,7 +51,6 @@
       -  libxcb-xkb-dev
       -  libxcb-xrm-dev
       -  libxcb1-dev
-      -  mopidy
       -  pcscd
       -  pkg-config
       -  python3-dev
