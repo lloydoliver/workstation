@@ -2,6 +2,7 @@
 
 sopsver="3.7.1"
 gpgkeyid="0x10A16862F507DEB8"
+_dpkg="-oDpkg::Use-Pty=0"
 
 sudo -v
 
@@ -19,11 +20,11 @@ fi
 printf "\n\nInstalling Dependencies\n  This may take a while, please wait ...\n"
 
 # Setup some repos and install some required packages
-sudo apt-get install -qq -y software-properties-common
+sudo apt-get install -qq "${_dpkg}" -y software-properties-common
 sudo apt-add-repository -y ppa:ansible/ansible &>/dev/null
 sudo apt-add-repository -y ppa:yubico/stable &>/dev/null
-sudo apt-get update -qq -y
-sudo apt-get install -qq -y ansible gnupg2 gnupg-agent scdaemon pcscd wget
+sudo apt-get update -qq "${_dpkg}" -y
+sudo apt-get install -qq "${_dpkg}" -y ansible gnupg2 gnupg-agent scdaemon pcscd wget
 
 # Download and install Mozilla SOPS (needed for ansible run)
 wget -q https://github.com/mozilla/sops/releases/download/v"${sopsver}"/sops_"${sopsver}"_amd64.deb
