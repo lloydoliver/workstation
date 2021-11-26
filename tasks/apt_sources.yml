@@ -8,7 +8,7 @@
 - name: APT | add Google Cloud SDK source
   become: yes
   apt_repository:
-    repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main
+    repo: deb http://packages.cloud.google.com/apt cloud-sdk main
     state: present
     filename: goole-cloud-sdk
 
