@@ -3,6 +3,7 @@
 sopsver="3.7.1"
 gpgkeyid="0x10A16862F507DEB8"
 
+# Call sudo to prompt for password if it's needed before rest of script runs
 sudo -v
 
 clear
@@ -26,15 +27,27 @@ sudo apt-get update -y &>/dev/null
 sudo apt-get install -y ansible gnupg2 gnupg-agent scdaemon pcscd wget &>/dev/null
 
 # Download and install Mozilla SOPS (needed for ansible run)
-wget -q https://github.com/mozilla/sops/releases/download/v"${sopsver}"/sops_"${sopsver}"_amd64.deb
+if [ ! -f sops_"${sopsver}"_amd64.deb ]; then
+  wget -q https://github.com/mozilla/sops/releases/download/v"${sopsver}"/sops_"${sopsver}"_amd64.deb
+fi
 sudo dpkg -i sops_*_amd64.deb &>/dev/null
 
 # Setup GPG config
 mkdir ~/.gnupg &>/dev/null
+  if [ ! -f ~/.gnupg/gpg.conf ]; then
 wget -q -P ~/.gnupg/ https://raw.githubusercontent.com/drduh/config/master/gpg.conf
-wget -q -P ~/.gnupg/ https://raw.githubusercontent.com/drduh/config/master/gpg-agent.conf
+fi
+
+if [ ! -f ~/.gnupg/gpg-agent.conf ]; then
+  wget -q -P ~/.gnupg/ https://raw.githubusercontent.com/drduh/config/master/gpg-agent.conf
+fi
 chmod 700 ~/.gnupg
 chmod 600 ~/.gnupg/gpg.conf
+
+# Setup GPG and SSH agent
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+gpgconf --launch gpg-agent
 
 # Get the GPG public key.
 gpg --keyserver hkps://keyserver.ubuntu.com --recv "${gpgkeyid}" &>/dev/null
@@ -44,6 +57,7 @@ gpg --keyserver hkps://keyserver.ubuntu.com --recv "${gpgkeyid}" &>/dev/null
 # TODO: Find a cleaner way to do this!!!
 # First we need to set the trust on the key to stop an additional prompt
 (echo 5; echo y; echo save) | gpg --command-fd 0 --no-tty --no-greeting -q --edit-key "${gpgkeyid}" trust
+
 # Now encrypt anything in the file using the key
 echo "unlock YubiKey" | gpg --encrypt --armor --recipient "${gpgkeyid}" -o Yubi.key
 # decrypt to force the pin entry prompt
