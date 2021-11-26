@@ -11,5 +11,6 @@
         - "{{ playbook_dir }}/tasks/vim.yml"
         - "{{ playbook_dir }}/tasks/dotfiles.yml"
         - "{{ playbook_dir }}/tasks/polybar.yml"
+        - "{{ playbook_dir }}/tasks/vscode.yml"
       loop_control:
         loop_var: task

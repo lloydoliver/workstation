@@ -1,0 +1,29 @@
+---
+- name: VSCode | Clone font repo
+  git:
+    repo: https://github.com/abertsch/Menlo-for-Powerline.git
+    dest: "{{ homedir }}/Menlo-for-Powerline"
+  register: menlo_repo
+
+- name: VSCode | Find fonts
+  find:
+    path: "{{ homedir }}/Menlo-for-Powerline/"
+    recurse: false
+    pattern: "Menlo*.ttf"
+  register: menlo_fonts
+
+- name: VSCode | Copy fonts
+  become: true
+  copy:
+    src: "{{ homedir }}/Menlo-for-Powerline/{{ item }}"
+    dest: "/usr/share/fonts/"
+  with_items:
+    - "{{ menlo_fonts.files }}"
+  when: menlo_repo.changed
+
+- name: VSCode | symlink code config
+  file:
+    state: link
+    src: "{{ homedir }}/.dotfiles/config/Code/settings.json"
+    dest: "{{ homedir }}/.config/Code/User/settings.json"
+    force: true
