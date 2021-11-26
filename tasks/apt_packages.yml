@@ -16,10 +16,12 @@
       -  cmake
       -  cmake-data
       -  compton
+      -  conky
       -  cryptsetup
       -  curl
       -  dconf-editor
       -  dirmngr
+      -  dunst
       -  feh
       -  firefox
       -  fonts-powerline
@@ -33,6 +35,7 @@
       -  google-cloud-sdk
       -  hopenpgp-tools
       -  htop
+      -  i3lock-fancy
       -  imagemagick
       -  libcairo2-dev
       -  libcurl4-openssl-dev
@@ -50,6 +53,7 @@
       -  libxcb-xkb-dev
       -  libxcb-xrm-dev
       -  libxcb1-dev
+      -  mopidy
       -  pcscd
       -  pkg-config
       -  python3-dev
@@ -67,6 +71,7 @@
       -  vim
       -  virtualbox
       -  xautolock
+      -  xsettingsd
       -  xcb-proto
       -  xclip
       -  zsh

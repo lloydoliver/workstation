@@ -1,33 +1,45 @@
 ---
-- name: add Google Cloud SDK APT source
+- name: APT | add Google signing key
+  become: yes
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: APT | add Google Cloud SDK source
   become: yes
   apt_repository:
     repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main
     state: present
     filename: goole-cloud-sdk
 
-- name: add Kubernetes APT source
+- name: APT | add Kubernetes source
   become: yes
   apt_repository:
     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
     state: present
     filename: k8s
 
-- name: add Google APT signing key
-  become: yes
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
-
-- name: add regolith APT source
+- name: APT | add regolith source
   become: yes
   apt_repository:
     repo: 'ppa:regolith-linux/release'
     state: present
 
-- name: add Yubico APT source
+- name: APT | add Yubico source
   become: yes
   apt_repository:
     repo: 'ppa:yubico/stable'
     state: present
 
+- name: APT | add Mopidy signing key
+  become: yes
+  apt_key:
+    url: https://apt.mopidy.com/mopidy.gpg
+    state: present
+
+- name: APT | add Mopidy source
+  become: yes
+  apt_repository:
+    repo: deb https://apt.mopidy.com/ buster main contrib non-free
+    filename: mopidy
+    state: present
