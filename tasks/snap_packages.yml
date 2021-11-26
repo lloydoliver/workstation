@@ -1,5 +1,6 @@
 ---
 - name: SNAP | install packages
+  become: yes
   snap:
     name: "{{ snap_pkg }}"
     classic: yes
