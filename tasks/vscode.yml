@@ -16,7 +16,7 @@
 - name: VSCode | Copy fonts
   become: true
   copy:
-    src: "{{ homedir }}/Menlo-for-Powerline/{{ item }}"
+    src: "{{ item.path }}"
     dest: "/usr/share/fonts/"
   with_items:
     - "{{ menlo_fonts.files }}"
