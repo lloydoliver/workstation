@@ -2,7 +2,6 @@
 
 sopsver="3.7.1"
 gpgkeyid="0x10A16862F507DEB8"
-_dpkg="-oDpkg::Use-Pty=0"
 
 sudo -v
 
@@ -20,11 +19,11 @@ fi
 printf "\n\nInstalling Dependencies\n  This may take a while, please wait ...\n"
 
 # Setup some repos and install some required packages
-sudo apt-get install -qq "${_dpkg}" -y software-properties-common
+sudo apt-get install -y software-properties-common &>/dev/null
 sudo apt-add-repository -y ppa:ansible/ansible &>/dev/null
 sudo apt-add-repository -y ppa:yubico/stable &>/dev/null
-sudo apt-get update -qq "${_dpkg}" -y
-sudo apt-get install -qq "${_dpkg}" -y ansible gnupg2 gnupg-agent scdaemon pcscd wget
+sudo apt-get update -y &>/dev/null
+sudo apt-get install -y ansible gnupg2 gnupg-agent scdaemon pcscd wget &>/dev/null
 
 # Download and install Mozilla SOPS (needed for ansible run)
 wget -q https://github.com/mozilla/sops/releases/download/v"${sopsver}"/sops_"${sopsver}"_amd64.deb
@@ -48,6 +47,7 @@ gpg --keyserver hkps://keyserver.ubuntu.com --recv "${gpgkeyid}" &>/dev/null
 # Now encrypt anything in the file using the key
 echo "unlock YubiKey" | gpg --encrypt --armor --recipient "${gpgkeyid}" -o Yubi.key
 # decrypt to force the pin entry prompt
+gpg --card-status &>/dev/null
 gpg --decrypt --armor Yubi.key
 
 printf "\n Done \n\n Running Ansible Playbook ...\n\n"
