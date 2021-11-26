@@ -21,9 +21,9 @@
       -  curl
       -  dconf-editor
       -  dirmngr
-      -  dunst
       -  feh
       -  firefox
+      -  flameshot
       -  fonts-powerline
       -  fzf
       -  gcc
@@ -35,7 +35,6 @@
       -  google-cloud-sdk
       -  hopenpgp-tools
       -  htop
-      -  imagemagick
       -  libcairo2-dev
       -  libcurl4-openssl-dev
       -  libjsoncpp-dev
@@ -76,5 +75,4 @@
       -  zsh
     update_cache: yes
   tags: [install]
-
 
