@@ -1,0 +1,12 @@
+---
+- name: SNAP | install packages
+  snap:
+    name: "{{ snap_pkg }}"
+    classic: yes
+    state: present
+  loop:
+    - spotify
+    - slack
+    - code
+  loop_control:
+    loop_var: snap_pkg
