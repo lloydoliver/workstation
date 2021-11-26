@@ -37,11 +37,16 @@ chmod 700 ~/.gnupg
 chmod 600 ~/.gnupg/gpg.conf
 
 # Get the GPG public key.
-yes | gpg --keyserver hkps://keyserver.ubuntu.com --recv "${gpgkeyid}" &>/dev/null
+gpg --keyserver hkps://keyserver.ubuntu.com --recv "${gpgkeyid}" &>/dev/null
 
 # In order for ansible to use the GPG key on the Yubikey, we need a way to prompt
 # for the PIN. Only way I've found so far is to encrypt then decrypt a file.
+# TODO: Find a cleaner way to do this!!!
+# First we need to set the trust on the key to stop an additional prompt
+(echo 5; echo y; echo save) | gpg --command-fd 0 --no-tty --no-greeting -q --edit-key "${gpgkeyid}" trust
+# Now encrypt anything in the file using the key
 echo "unlock YubiKey" | gpg --encrypt --armor --recipient "${gpgkeyid}" -o Yubi.key
+# decrypt to force the pin entry prompt
 gpg --decrypt --armor Yubi.key
 
 printf "\n Done \n\n Running Ansible Playbook ...\n\n"
