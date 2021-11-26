@@ -21,7 +21,7 @@ sudo apt-get install -qq -y software-properties-common
 sudo apt-add-repository -y ppa:ansible/ansible &>/dev/null
 sudo apt-add-repository -y ppa:yubico/stable &>/dev/null
 sudo apt-get update -qq -y
-sudo apt-get install -qq -y ansible gnupg2 gnupg-agent gnupg-curl scdaemon pcscd wget
+sudo apt-get install -qq -y ansible gnupg2 gnupg-agent scdaemon pcscd wget
 
 # Download and install Mozilla SOPS (needed for ansible run)
 wget -q https://github.com/mozilla/sops/releases/download/"${sopsver}"/sops_"${sopsver}"_amd64.deb
