@@ -18,7 +18,7 @@
     url: https://tpo.pe/pathogen.vim
     dest: "{{ homedir }}/.vim/autoload/pathogen.vim"
 
-- name: VIM | Install {{ plugin }}
+- name: VIM | Install plugins
   git:
     dest: "{{ homedir }}/.vim/bundle/{{ vim_plugin.name }}"
     repo: "https://github.com/{{ vim_plugin.repo }}"
