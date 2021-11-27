@@ -68,4 +68,5 @@ printf "\n Done \n\n Running Ansible Playbook ...\n\n"
 sleep 1
 
 # Run Ansible
+ansible-galaxy install -r requirements.yml
 ansible-playbook -i inventory.yml --ask-become-pass main.yml
