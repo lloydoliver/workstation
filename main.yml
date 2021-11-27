@@ -4,6 +4,11 @@
     - name: Load encrypted vars file
       community.sops.load_vars:
         file: group_vars/all.sops.yml
+
+- hosts: all
+  roles:
+    - oh-my-zsh
+  tasks:
     - include_tasks: "{{ task }}"
       loop:
         - "{{ playbook_dir }}/tasks/apt_sources.yml"
@@ -15,3 +20,4 @@
         - "{{ playbook_dir }}/tasks/vscode.yml"
       loop_control:
         loop_var: task
+
