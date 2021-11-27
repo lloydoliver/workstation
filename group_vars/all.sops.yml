@@ -1,14 +1,18 @@
 homedir: ENC[AES256_GCM,data:/NJgPj1tD1CV8cYYgw==,iv:n7dq8tVlydv1azxNPUmGHxeQ2JziI+ukdnGZ4t/FNSI=,tag:dJCtKi54Wiym8t4Aem/kyA==,type:str]
 sudo_password: ENC[AES256_GCM,data:CO0QT756t7c=,iv:Z8Wx+XvGwg01BWR+ExZa5mdN0qCmb7eeyVUh8os+b3g=,tag:QWDwxmcjTt6nJ2OvscvwPQ==,type:str]
 dotfile_repo: ENC[AES256_GCM,data:i0uNsUnwbiY0qU9RRxacBfRijEJjn048CGNtUBj3XSpGsWb2EYj/,iv:IzRxFJ4cbG/TFJdtN2in7cOFy7WKe0TQjGXAzYVasKI=,tag:7f1efP5LtHQpqelKAF5tlA==,type:str]
+users:
+    - username: ENC[AES256_GCM,data:oLZcJiiD5A==,iv:VrjcCH8ZtKmZEYkqYcWSA2ezxzYJREY8Qq159zyorTU=,tag:4X6bbQpP9qVfA1BtNZqnGg==,type:str]
+      oh_my_zsh:
+        install: ENC[AES256_GCM,data:hByh,iv:/Rtizvz2V/ZgpJHN4bd1lSyfTvOegIRyKzE/2QVuZf0=,tag:xQUbrMZKlY+QwweNZyg0Rw==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2021-11-25T21:06:46Z"
-    mac: ENC[AES256_GCM,data:fE/9rmQ4r8bEYNk96XrMymmu1euWK22BnlwUG5mvEtLLtokiwCWAgOEFD29mWumYFSGB01WlynTjsS+vWArjdidKBHnNIs2hLZIIKDwhhC4tE6aQysYWcLaLRQ4N0nMWpgbIigp6g8GLSfVgB4msPsnWHQLWt+IHhVI6fh4t0o0=,iv:7emHoba0grUkb4aKGu20Y2EA/xJbKzVWvXjNA5JrXg4=,tag:WzxsdhGZejWexj8LRf/pVQ==,type:str]
+    lastmodified: "2021-11-27T00:20:33Z"
+    mac: ENC[AES256_GCM,data:ybu87c5wF1f+N77TbbH15ct/zKM2N2vHdFezO9veWcs/juAXxH13wfMqXauGP+PISSFBnjNvPX99UqzdZcf+bf7vXd9tonb5M6Sf6vtXH5ZwH/2VoUQGNruqnm+FnCN+e+m7fzJjRkatZsQWEqc3GN4oiwl53++V2aLSBFKNB44=,iv:EZNr9xsDkdBL/MejYgHpe/xw7N3VUqze3JU4GevbgMw=,tag:kASh7EdNOIKmi3l7JZ/5tw==,type:str]
     pgp:
         - created_at: "2021-11-25T18:11:49Z"
           enc: |
