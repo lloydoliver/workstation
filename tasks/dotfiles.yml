@@ -50,3 +50,7 @@
     dest: "/etc/regolith/i3/config"
     force: true
 
+- name: DOTFILES | Download/Install .dircolors
+  get_url:
+    url: "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"
+    dest: "{{ homedir }}/.dircolors"
