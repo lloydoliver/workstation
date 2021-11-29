@@ -39,6 +39,7 @@
     - .vimrc
     - .gitconfig
     - .gitignore
+    - .Xresources-regolith
   loop_control:
     loop_var: dotfile
 
