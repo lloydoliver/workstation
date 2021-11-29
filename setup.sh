@@ -70,3 +70,5 @@ sleep 1
 # Run Ansible
 ansible-galaxy install -r requirements.yml
 ansible-playbook -i inventory.yml --ask-become-pass main.yml
+
+sudo reboot
